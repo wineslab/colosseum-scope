@@ -1,0 +1,63 @@
+# Prerequisites
+*.d
+
+.Xauthority
+.bash_history
+.bashrc
+.cache/
+.config/
+.lesshst
+.profile
+.vim/
+.viminfo
+.ssh/
+reservation_nodes.pkl
+
+# Build files
+radio_code/srsGUI/build/*
+radio_code/srsLTE/build/*
+
+._CMakeLists.txt
+.*DS_Store
+._*
+colosseum-cli-install
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.pyc
+
+radio_code/scope_config/metrics/csv/
+!radio_code/scope_config/metrics/csv/.gitkeep
+
+*.srslte_fftwisdom
+*.backtrace.crash
+
+.gitconfig
+

@@ -1,0 +1,6 @@
+colosseum_config.ini
+colosseum_config_interactive.ini
+
+.DS_Store
+._*
+*.bkp

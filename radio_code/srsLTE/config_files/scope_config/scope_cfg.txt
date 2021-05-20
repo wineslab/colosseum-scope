@@ -1,0 +1,5 @@
+colosseum_testbed::1
+force_dl_modulation::0
+force_ul_modulation::0
+global_scheduling_policy::0
+network_slicing_enabled::1
