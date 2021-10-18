@@ -28,8 +28,6 @@ if __name__ == '__main__':
     console.setFormatter(formatter)
     logging.getLogger('').addHandler(console)
 
-    base_config = config_path + 'radio_interactive.conf'
-
     # parse config file
     config_path = os.path.expanduser('~/radio_api/')
     slice_heuristic_config = config_path + args.config_file
