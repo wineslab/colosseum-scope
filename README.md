@@ -66,7 +66,7 @@ A list of the configuration parameters accepted by SCOPE APIs follows.
 - `custom-ue-slice`: Use UE-slice associations passed in the configuration file
 - `dl-freq`/`ul-freq`: Downlink/uplink frequency for base station and users [Hz]
 - `dl-prb`: Number of downlink PRBs to use at the base station
-- `force-dl-modulation`/`force-ul-modulation`: Force downlink/uplink modulation from base station to users
+- `force-dl-modulation`/`force-ul-modulation`: Force downlink/uplink modulation of base station/users
 - `global-scheduling-policy`: Global MAC-layer scheduling policy. Used at base station side, overruled by slice-dependent scheduling if network slicing is enabled. Possible values are: `0`: Round-robin, `1`: Waterfilling, `2`: Proportionally fair
 - `iperf`: Generate traffic through `iperf3`, downlink only
 - `network-slicing`: Enable network slicing. Used at base station side
