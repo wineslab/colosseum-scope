@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: If you use this software, please cite the following paper.
+authors:
+  - family-names: Bonati
+    given-names: Leonardo
+  - family-names: D'Oro
+    given-names: Salvatore
+  - family-names: Basagni
+    given-names: Stefano
+  - family-names: Melodia
+    given-names: Tommaso
+title: "Code for SCOPE: An Open and Softwarized Prototyping Platform for NextG Systems"
+type: dataset
+date-released: 2021-07-13
+license: GPL-3.0
+repository-code: "https://github.com/wineslab/colosseum-scope"
+preferred-citation:
+  type: conference-paper
+  authors:
+  - family-names: Bonati
+    given-names: Leonardo
+  - family-names: D'Oro
+    given-names: Salvatore
+  - family-names: Basagni
+    given-names: Stefano
+  - family-names: Melodia
+    given-names: Tommaso
+  title: "SCOPE: An Open and Softwarized Prototyping Platform for NextG Systems"
+  collection-title: Proceedings of ACM MobiSys
+  month: June
+  year: 2021
