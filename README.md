@@ -60,7 +60,7 @@ Quick start on Colosseum with base configuration:
 A list of the configuration parameters accepted by SCOPE APIs follows.
 
 - `bs-config`/`ue-config`: Base station/UE configuration parameters to override those specified on srsLTE configuration files. Format as json, e.g., `{'n_prb': 50, 'dl_freq': 2655000000, 'ul_freq': 2535000000}`
-- `capture-pkts`: Enable packet capture and dumps them on `.pcap` files through `tcpdump`. By default, the monitored interfaces are `srs_spgw_sgi`, `tun_srsue`, and Colosseum `tr0` interfaces
+- `capture-pkts`: Enable packet capture and dumps them on `.pcap` files through `tcpdump`. By default, the monitored interfaces are `srs_spgw_sgi`, `tun_srsue`, and Colosseum `tr0`
 - `colcli`: Use `colosseumcli` APIs to get list of active nodes. This parameter is specific to Colosseum and it is only available in interactive mode
 - `config-file`: JSON-formatted configuration file where to read these parameters from. The other arguments are ignored if a configuration file is passed
 - `custom-ue-slice`: Use UE-slice associations passed in the configuration file
