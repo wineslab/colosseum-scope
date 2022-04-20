@@ -4,7 +4,10 @@ SCOPE is a development environment for softwarized and virtualized NextG cellula
 It provides: (i) A ready-to-use portable open-source cellular container with flexible 5G-oriented functionalities; (ii) data collection tools, such as dataset generation functions for recording cellular performance and metrics, and for facilitating data analysis; (iii) a set of APIs to control and reprogram key functionalities of the full cellular stack at run time, without requiring redeploying the network, and (iv) an emulation environment with diverse cellular scenarios closely matching real-world deployments for precise prototyping NextG network solutions.
 SCOPE has been prototyped and benchmarked on the <a href="https://www.colosseum.net" target="_blank">Colosseum</a> wireless network emulator, where an LXC container of SCOPE has been made available, and it is portable to LXC-enabled testbeds.
 
-If you use SCOPE, its APIs or scenarios, please reference the following paper: L. Bonati, S. D'Oro, S. Basagni, and T. Melodia, <i>"SCOPE: An Open and Softwarized Prototyping Platform for NextG Systems,"</i> in Proceedings of ACM MobiSys, June 2021. <a href="https://ece.northeastern.edu/wineslab/papers/bonati2021scope.pdf" target="_blank">[pdf]</a> <a href="https://ece.northeastern.edu/wineslab/wines_bibtex/bonati2021scope.txt" target="_blank">[bibtex]</a>
+If you use SCOPE, its APIs or scenarios, please reference the following paper:
+> L. Bonati, S. D'Oro, S. Basagni, and T. Melodia, <i>"SCOPE: An Open and Softwarized Prototyping Platform for NextG Systems,"
+> </i> in Proceedings of ACM MobiSys, June 2021.
+> <a href="https://ece.northeastern.edu/wineslab/papers/bonati2021scope.pdf" target="_blank">[pdf]</a> <a href="https://ece.northeastern.edu/wineslab/wines_bibtex/bonati2021scope.txt" target="_blank">[bibtex]</a>
 
 This work was partially supported by the U.S. National Science Foundation under Grant CNS-1923789 and the U.S. Office of Naval Research, Grants N00014-19-1-2409 and N00014-20-1-2132.
 
