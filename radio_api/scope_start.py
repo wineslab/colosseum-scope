@@ -416,10 +416,16 @@ def is_node_bs(bs_ue_num: int, use_colosseumcli: bool) -> tuple:
     logging.info('Active nodes: ' + str(active_nodes))
 
     # check that we have enough nodes in the reservation for the set
-    # number of UEs per base stations. (-1: one node is the BS)
-    if len(active_nodes.keys()) - 1 < bs_ue_num:
-        logging.warning('Not enough active nodes in the reservation to accomodate ' +\
-            str(bs_ue_num) + ' users per base station. Setting users per base station to: ' +\
+    # number of UEs per base stations. (-1: one node is the BS).
+    # If no nodes are fond through colosseumcli, most likely the scenario has not been started
+    if len(active_nodes.keys()) == 0 and use_colosseumcli:
+        logging.error('No nodes found, exiting. ' + \
+            'Did you start the Colosseum scenario (colosseumcli rf start <scenario-number> -c)? ' + \
+            'If in batch mode, disable the colosseumcli option in the configuration file')
+        exit(1)
+    elif len(active_nodes.keys()) - 1 < bs_ue_num:
+        logging.warning('Not enough active nodes in the reservation to accomodate ' + \
+            str(bs_ue_num) + ' users per base station. Setting users per base station to: ' + \
             str(len(active_nodes.keys()) - 1))
         bs_ue_num = len(active_nodes.keys()) - 1
 
