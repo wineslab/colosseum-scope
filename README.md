@@ -42,7 +42,7 @@ Quick start on Colosseum with base configuration:
 - Main SCOPE API scripts:
     - `constants.py`: Constant parameters used by the remaining scripts
     - `scope_api.py`: APIs to interact with cellular base station
-    - `scope_start.py`: Quick start script for running on Colosseum testbed: Parse configuration file, configure and start cellular applications (i.e., base station and core network, or user). If using the quick start script outside Colosseum some pieces might require minor adaptation, e.g., manually supplying the node list instead of leveraging the automatic node discovery 
+    - `scope_start.py`: Quick start script for running on Colosseum testbed: Parse configuration file, configure and start cellular applications (i.e., base station and core network, or user). If using the quick start script outside Colosseum some pieces might require minor adaptation, e.g., manually supplying the node list instead of leveraging the automatic node discovery. Note that this script generates runtime logs in the `/logs` directory. If running it on your local machine, please make sure that such directory exists, and that your user can write inside it
     - `support_functions.py`: Additional support functions
 - Exemplary scripts (to be run at the base station):
     - `heuristic.py`: Read performance metrics from dataset and implement arbitrary heuristic policy. In this example, read downlink buffer and throughput relative to served users from performance dataset. Then assign more resources to slices if buffers are above threshold (policy slice 0), and throughput is above threshold (policy for slice 2). If more users are served in a single slice, also change the slice scheduling policy from round-robin to waterfilling.
