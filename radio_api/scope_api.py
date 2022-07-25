@@ -103,7 +103,8 @@ def get_srsue_ip_mapping(bs_id: int, nodes_ip: dict, srslte_config_dir: str) -> 
         srs_ue_imsi = user_line[2]
 
         try:
-            srs_col_ip_mapping[nodes_ip[srs_ue_id]] = srs_ue_ip
+            if nodes_ip is not None:
+                srs_col_ip_mapping[nodes_ip[srs_ue_id]] = srs_ue_ip
             srs_imsi_id_mapping[srs_ue_imsi] = srs_ue_id
         except KeyError:
             # skip keys of users not in the network
@@ -955,6 +956,26 @@ def set_power(ue_imsi: str, scaling_factor: int) -> None:
 
     path = 'config/ue_config_power_multiplier_slice_' + str(ue_slice) + '.txt'
     write_config_param_single(ue_rnti, scaling_factor, path)
+
+
+# copy default/colosseum rr.conf and sib.conf
+def copy_rr_sib_drb_conf(generic_testbed: bool) -> None:
+
+    dst_dir = constants.RUNNING_CONFIG
+
+    # if generic_testbed:
+    #     logging.info('Copying default rr.conf, sib.conf, and drb.conf configuration files')
+    #     src_dir = constants.GENERIC_CONFIG
+    # else:
+    #     logging.info('Copying Colosseum-specific rr.conf, sib.conf, and drb.conf configuration files')
+    #     src_dir = constants.COLOSSEUM_CONFIG
+
+    # always copy Colosseum configuration. It seems to work better
+    logging.info('Copying rr.conf, sib.conf, and drb.conf configuration files')
+    src_dir = constants.COLOSSEUM_CONFIG
+
+    cpy_cmd = 'cp %s/rr.conf %s/; cp %s/sib.conf %s/; cp %s/drb.conf %s/' % (src_dir, dst_dir, src_dir, dst_dir, src_dir, dst_dir)
+    os.system(cpy_cmd)
 
 
 if __name__ == '__main__':
