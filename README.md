@@ -87,7 +87,6 @@ The `radio_code` directory contains a modified version of <a href="https://githu
 - `srsLTE`: This is a modified version of srsLTE with the 5G-oriented functionalities enabled by SCOPE (see Section 3 of [[1]](#1))
 - `scope_config`: Configuration files used by SCOPE base station. A template version of these files is stored in `../srsLTE/config_files/scope_config`
     - `scope_cfg.txt`: Global configuration file to enable/disable SCOPE functionalities. All parameters are disabled if not found in the file. Loaded parameters:
-    - `remove_experiment_data.sh`: Removes collected data from old runs
         - `colosseum_testbed`: Enables Colosseum-specific configuration of radio parameters
         - `force_dl_modulation`/`force_ul_modulation`: Enables forcing of downlink/uplink modulation for selected users. The actual modulation can be specified in `slicing/ue_imsi_modulation_dl.txt`/`ue_imsi_modulation_ul.txt`
         - `global_scheduling_policy`: Specifies scheduling policy for the whole network.<sup>[2](#footnote2)</sup> Available choices are:
@@ -95,6 +94,7 @@ The `radio_code` directory contains a modified version of <a href="https://githu
             - `1`: Waterfilling scheduling policy
             - `2`: Proportionally fair scheduling policy
         - `network_slicing_enabled`: Enables network slicing loading slicing-related configuration files in the `slicing` directory
+    - `remove_experiment_data.sh`: Removes collected data from old runs
     - `config`: This directory gets populated at run time with user-related parameters (e.g., downlink power scaling factor)
     - `metrics/csv`: CSV files on user performance are automatically logged in this directory at run time
     - `slicing`: Contains slicing- and user- related configuration files:
