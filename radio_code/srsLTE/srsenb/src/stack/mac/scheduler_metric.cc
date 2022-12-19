@@ -589,6 +589,17 @@ void ul_metric_rr::sched_users(std::map<uint16_t, sched_ue>& ue_db, ul_sf_sched_
     return;
   }
 
+
+  if (network_slicing_enabled) {
+
+  // copy slicing mask to tti slicing mask. Do this at every new tti
+    for (int s_idx = 0; s_idx < MAX_SLICING_TENANTS; ++s_idx) {
+      for (int rbg_idx = 0; rbg_idx < MAX_MASK_LENGTH; ++rbg_idx) {
+        slicing_structure[s_idx].ul_tti_slicing_mask[rbg_idx] = slicing_structure[s_idx].ul_slicing_mask[rbg_idx];
+      }
+    }
+  }
+
   // give priority in a time-domain RR basis
   uint32_t priority_idx =
       (current_tti + (uint32_t)ue_db.size() / 2) % (uint32_t)ue_db.size(); // make DL and UL interleaved
@@ -644,6 +655,72 @@ bool ul_metric_rr::find_allocation(uint32_t L, ul_harq_proc::ul_alloc_t* alloc)
   }
   if (alloc->L == 0) {
     return false;
+  }
+
+  // Make sure L is allowed by SC-FDMA modulation
+  while (!srslte_dft_precoding_valid_prb(alloc->L)) {
+    alloc->L--;
+  }
+  return alloc->L == L;
+}
+
+bool ul_metric_rr::find_allocation_slicing(uint32_t L, ul_harq_proc::ul_alloc_t* alloc, uint8_t* tti_slicing_mask, uint32_t P)
+{
+  const prbmask_t* used_rb = &tti_alloc->get_ul_mask();
+  bzero(alloc, sizeof(ul_harq_proc::ul_alloc_t));
+
+  // Find allowed PRB according to slice RBGs
+  prbmask_t unavailable_rb(used_rb->size());
+
+  // set unavailable rbs according to tti_slicing_mask
+  for (int i = 0; i < cell_rbgs; ++i) {
+    // if the RBG is unavailable
+    if (tti_slicing_mask[i] == 0) {
+      // then set the corresponding RBs as unavailable
+      for (size_t j = 0; j < P && i*P+j < unavailable_rb.size(); ++j) {
+        unavailable_rb.set(P*i+j);
+      }
+    }
+  }
+
+  // the unavailable RBs are both those not included in the slices and those already allocated
+  unavailable_rb |= *used_rb;
+
+  for (uint32_t n = 0; n < unavailable_rb.size() && alloc->L < L; n++) {
+    if (not unavailable_rb.test(n) && alloc->L == 0) {
+      alloc->RB_start = n;
+    }
+    if (not unavailable_rb.test(n)) {
+      alloc->L++;
+    } else if (alloc->L > 0) {
+      // avoid edges
+      if (n < 3) {
+        alloc->RB_start = 0;
+        alloc->L        = 0;
+      } else {
+        break;
+      }
+    }
+  }
+  if (alloc->L == 0) {
+    return false;
+  }
+
+
+  // update tti_slicing_mask according to the assigned RBs
+  for (int i = 0; i < cell_rbgs; i++) {
+    // if one of the RBs composing the RBG is occupied
+    bool any = false;
+    for (size_t j = 0; j < P && i*P+j < unavailable_rb.size(); ++j) {
+      if (unavailable_rb.test(i*P+j)) {
+        any = true;
+        break;
+      }
+    }
+    // then the RBG is occupied
+    if (any) {
+      tti_slicing_mask[i] = 0;
+    }
   }
 
   // Make sure L is allowed by SC-FDMA modulation
@@ -710,12 +787,25 @@ ul_harq_proc* ul_metric_rr::allocate_user_newtx_prbs(sched_ue* user)
   uint32_t      pending_data = user->get_pending_ul_new_data(current_tti);
   ul_harq_proc* h            = user->get_ul_harq(current_tti, cell_idx);
 
+
+  bool use_custom_mask = false;
+
+  if (network_slicing_enabled && user && user->slice_number > -1) {
+    use_custom_mask = true;
+  }
+
   // find an empty PID
   if (h->is_empty(0) and pending_data > 0) {
     uint32_t                 pending_rb = user->get_required_prb_ul(cell_idx, pending_data);
     ul_harq_proc::ul_alloc_t alloc{};
 
-    find_allocation(pending_rb, &alloc);
+    if (use_custom_mask) {
+        find_allocation_slicing(pending_rb, &alloc, slicing_structure[user->slice_number].ul_tti_slicing_mask, cc_cfg->P);
+    }
+    else {
+        find_allocation(pending_rb, &alloc);
+    }
+
     if (alloc.L > 0) { // at least one PRB was scheduled
       alloc_outcome_t ret = tti_alloc->alloc_ul_user(user, alloc);
       if (ret == alloc_outcome_t::SUCCESS) {

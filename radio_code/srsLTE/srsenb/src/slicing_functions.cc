@@ -112,6 +112,7 @@ void get_slicing_allocation_mask(int slice_idx, Slice_Tenants* slicing_struct, i
 
     // initialize array to return
     uint8_t slice_mask[MAX_MASK_LENGTH];
+    uint8_t ul_slice_mask[MAX_MASK_LENGTH];
 
     // Initialize slice_alloc_mask
     for (rbg = 0; rbg < MAX_MASK_LENGTH; ++rbg) {
@@ -122,9 +123,11 @@ void get_slicing_allocation_mask(int slice_idx, Slice_Tenants* slicing_struct, i
 
     // form filename
     std::string slicing_filename;
+    std::string ul_slicing_filename;
     std::ostringstream oss;
     oss << "slice_allocation_mask_tenant_" << slice_idx << ".txt";
     slicing_filename = oss.str();
+    ul_slicing_filename = "ul_" + oss.str();
     oss.clear();
 
     // read slicing allocation mask
@@ -133,10 +136,12 @@ void get_slicing_allocation_mask(int slice_idx, Slice_Tenants* slicing_struct, i
     slicing_dir_path = SCOPE_CONFIG_DIR;
     slicing_dir_path += "slicing/";
     read_slice_allocation_mask(slice_idx, slicing_dir_path, slicing_filename, slice_mask, MAX_MASK_LENGTH, line_to_read);
+    read_slice_allocation_mask(slice_idx, slicing_dir_path, ul_slicing_filename, ul_slice_mask, MAX_MASK_LENGTH, line_to_read);
 
     // only save active RBGs and set to 0 the rest
     for (rbg = 0; rbg < cell_rbgs; ++rbg) {
         slicing_struct->slicing_mask[rbg] = slice_mask[rbg];
+        slicing_struct->ul_slicing_mask[rbg] = ul_slice_mask[rbg];
 
         // add total number of RBGs
         prb_mask_tot += slice_mask[rbg];
