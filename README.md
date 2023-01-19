@@ -136,6 +136,12 @@ The available distances between users and base stations are: `close`, users are 
 
 Due to space limitations, only a selection of these scenarios is currently available on Colosseum. The remaining scenarios can be built and installed upon request.
 
+## Running on Testbeds External to Colosseum
+The command line option `--generic-testbed` should facilitate running SCOPE outside the Colosseum environment.
+
+## Troubleshooting
+- Command-line options are not applied: Sometimes it may look like the CLI options are not applied. These options are overridden by the configuration file, if passed.
+
 ## References
 <a id="1">[1]</a> 
 L. Bonati, S. D'Oro, S. Basagni, and T. Melodia,
