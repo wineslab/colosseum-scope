@@ -36,6 +36,12 @@ typedef struct {
     // slicing mask for current tti
     uint8_t tti_slicing_mask[MAX_MASK_LENGTH];
 
+    // UL slicing allocation mask
+    uint8_t ul_slicing_mask[MAX_MASK_LENGTH];
+
+    // UL slicing mask for current tti
+    uint8_t ul_tti_slicing_mask[MAX_MASK_LENGTH];
+
 } Slice_Tenants;
 
 // add structure to save user parameters

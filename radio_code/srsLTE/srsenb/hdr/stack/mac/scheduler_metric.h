@@ -68,6 +68,10 @@ public:
 
 private:
   bool          find_allocation(uint32_t L, ul_harq_proc::ul_alloc_t* alloc);
+
+  //SCOPE: find allocation in case of slicing
+  bool          find_allocation_slicing(uint32_t L, ul_harq_proc::ul_alloc_t* alloc, uint8_t* tti_slicing_mask, uint32_t P);
+
   ul_harq_proc* allocate_user_newtx_prbs(sched_ue* user);
   ul_harq_proc* allocate_user_retx_prbs(sched_ue* user);
 
