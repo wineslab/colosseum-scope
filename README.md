@@ -7,7 +7,7 @@ SCOPE has been prototyped and benchmarked on the <a href="https://www.colosseum.
 If you use SCOPE, its APIs or scenarios, please reference the following paper:
 > L. Bonati, S. D'Oro, S. Basagni, and T. Melodia, <i>"SCOPE: An Open and Softwarized Prototyping Platform for NextG Systems,"
 > </i> in Proceedings of ACM MobiSys, June 2021.
-> <a href="https://ece.northeastern.edu/wineslab/papers/bonati2021scope.pdf" target="_blank">[pdf]</a> <a href="https://ece.northeastern.edu/wineslab/wines_bibtex/bonati2021scope.txt" target="_blank">[bibtex]</a>
+> <a href="https://dl.acm.org/doi/pdf/10.1145/3458864.3466863" target="_blank">[pdf]</a>
 
 This work was partially supported by the U.S. National Science Foundation under Grant CNS-1923789 and the U.S. Office of Naval Research, Grants N00014-19-1-2409 and N00014-20-1-2132.
 
@@ -147,8 +147,7 @@ The command line option `--generic-testbed` should facilitate running SCOPE outs
 L. Bonati, S. D'Oro, S. Basagni, and T. Melodia,
 <i>"SCOPE: An Open and Softwarized Prototyping Platform for NextG Systems,"</i>
 in Proceedings of ACM MobiSys, June 2021.
-<a href="https://ece.northeastern.edu/wineslab/papers/bonati2021scope.pdf" target="_blank">[pdf]</a>
-<a href="https://ece.northeastern.edu/wineslab/wines_bibtex/bonati2021scope.txt" target="_blank">[bibtex]</a>
+<a href="https://dl.acm.org/doi/pdf/10.1145/3458864.3466863" target="_blank">[pdf]</a>
 
 ---
 
