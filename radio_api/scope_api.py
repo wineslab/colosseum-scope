@@ -323,7 +323,7 @@ def write_imsi_slice(config_params: dict, imsi_id_mapping: dict) -> None:
 
 
 # write tenant resource allocation on file
-def write_tenant_slicing_mask(config_params: dict, full_mask: bool=False, slice_idx: int=-1) -> None:
+def write_tenant_slicing_mask(config_params: dict, full_mask: bool=False, slice_idx: int=-1, ul: bool=False) -> None:
 
     # total number of RBGs srsLTE expects to read and
     # number used with the current configuration
@@ -335,6 +335,8 @@ def write_tenant_slicing_mask(config_params: dict, full_mask: bool=False, slice_
 
     path = constants.SCOPE_CONFIG + 'slicing/'
     filename = 'slice_allocation_mask_tenant_'
+    if ul:
+        filename = 'ul_' + filename
     out_file = path + filename
 
     if config_params['network_slicing_enabled']:
@@ -628,10 +630,12 @@ def read_slice_scheduling() -> list:
 
 
 # read mask of passed slice
-def read_slice_mask(slice_idx: int) -> str:
+def read_slice_mask(slice_idx: int, ul: bool = False) -> str:
 
     path = constants.SCOPE_CONFIG + 'slicing/'
     filename = 'slice_allocation_mask_tenant_'
+    if ul:
+        filename = 'ul_' + filename
     in_file = path + filename + str(slice_idx) + '.txt'
 
     try:
@@ -916,10 +920,13 @@ def set_slice_users(imsi_slice_dict: dict()) -> None:
 
 
 # set slice RBG resources for a single slice
-def set_slice_resources(slice_idx: int, slice_mask: str) -> None:
+def set_slice_resources(slice_idx: int, slice_mask: str, ul: bool=False) -> None:
 
     path = constants.SCOPE_CONFIG
-    filename = 'slicing/slice_allocation_mask_tenant_'
+    if ul:
+        filename = 'slicing/ul_slice_allocation_mask_tenant_'
+    else:
+        filename = 'slicing/slice_allocation_mask_tenant_'
     path += filename
 
     write_full_slice_mask(slice_idx, slice_mask, 1, path)
